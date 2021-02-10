@@ -6,13 +6,29 @@
   "scripts": {
     "start": "ts-node-dev src/index.ts",
     "test": "jest --watchAll --no-cache --detectOpenHandles",
-    "test:ci": "jest"
+    "test:ci": "jest --coverage"
   },
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node",
     "setupFilesAfterEnv": [
       "./src/test/setup.ts"
+    ],
+    "collectCoverageFrom": [
+      "**/*.{ts,tsx}",
+      "!coverage/**",
+      "!node_modules/**",
+      "!src/index.ts",
+      "!test/**",
+      "!client/**"
+    ],
+    "coverageReporters": [
+      "text",
+      "lcov",
+      "json",
+      "text",
+      "clover",
+      "cobertura"
     ]
   },
   "keywords": [],

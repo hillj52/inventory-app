@@ -29,7 +29,7 @@ router.post(
 
     const existingSource = await Source.findOne({
       name,
-    });
+    }).exec();
     if (existingSource) {
       throw new BadRequestError('Source with that name already exists', 'name');
     }
