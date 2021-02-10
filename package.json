@@ -20,7 +20,8 @@
       "!node_modules/**",
       "!src/index.ts",
       "!test/**",
-      "!client/**"
+      "!client/**",
+      "!**/__test__/**"
     ],
     "coverageReporters": [
       "text",
