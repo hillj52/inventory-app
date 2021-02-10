@@ -15,7 +15,7 @@ router.post(
   '/api/sources/addSource',
   currentUser,
   requireLogin,
-  //requireRole(Roles.EDIT_INVENTORY),
+  requireRole(Roles.EDIT_INVENTORY),
   [
     body('name')
       .trim()

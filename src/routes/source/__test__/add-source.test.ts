@@ -7,9 +7,9 @@ it('can only be accessed if a user is signed in', async () => {
   await request(app).post('/api/sources/addSource').send({}).expect(401);
 });
 
-it('returns a status other than 401 if the user is logged in ', async () => {
+it('returns a status other than 401 if the user is logged in with correct roles', async () => {
   const cookie = await signIn();
-  await updateRoles([]);
+  await updateRoles([Roles.EDIT_INVENTORY]);
   const response = await request(app)
     .post('/api/sources/addSource')
     .set('Cookie', cookie)
