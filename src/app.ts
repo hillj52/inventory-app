@@ -7,6 +7,7 @@ import { errorHandler } from './middlewares/error-handler';
 
 import { authRouter } from './routes/auth';
 import { sourceRouter } from './routes/source';
+import { brandRouter } from './routes/brand';
 
 const app = express();
 app.set('trust_proxy', true);
@@ -21,10 +22,11 @@ app.use(
 // use routers here
 app.use(authRouter);
 app.use(sourceRouter);
+app.use(brandRouter);
 
 // add logic for front end routing here
 if (process.env.NODE_ENV === 'production') {
-  // Express will server up production assests
+  // Express will server up production assets
   app.use(express.static('client/build'));
 
   //Express will server up index.html if it doesn't recognize the route

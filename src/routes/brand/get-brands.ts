@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 
-import { Source } from '../../models/source';
+import { Brand } from '../../models/brand';
 import { Roles } from '../../models/user';
 import { NotFoundError } from '../../errors/not-found-error';
 import { currentUser } from '../../middlewares/current-user';
@@ -10,19 +10,19 @@ import { requireRole } from '../../middlewares/require-role';
 const router = express.Router();
 
 router.get(
-  '/api/sources',
+  '/api/brands',
   currentUser,
   requireLogin,
   requireRole(Roles.VIEW_INVENTORY),
   async (req: Request, res: Response) => {
-    const sources = await Source.find({}).exec();
+    const brands = await Brand.find({}).exec();
 
-    if (!sources) {
+    if (!brands) {
       throw new NotFoundError();
     }
 
-    res.send(sources);
+    res.send(brands);
   }
 );
 
-export { router as getSourcesRouter };
+export { router as getBrandsRouter };
