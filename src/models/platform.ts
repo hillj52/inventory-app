@@ -52,7 +52,7 @@ const platformSchema = new mongoose.Schema<IPlatformDocument, IPlatformModel>(
     toJSON: {
       transform(doc, ret) {
         ret.id = ret._id;
-        delete ret.id;
+        delete ret._id;
       },
     },
   }

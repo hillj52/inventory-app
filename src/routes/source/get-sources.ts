@@ -8,10 +8,10 @@ import { requireRole } from '../../middlewares/require-role';
 const router = express.Router();
 
 router.get(
-  '/api/sources/getSources',
+  '/api/sources',
   requireRole(Roles.VIEW_INVENTORY),
   async (req: Request, res: Response) => {
-    const sources = await Source.find({});
+    const sources = await Source.find({}).exec();
 
     if (!sources) {
       throw new NotFoundError();

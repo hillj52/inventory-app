@@ -1,23 +1,27 @@
 import express, { Request, Response } from 'express';
-
 import { Source } from '../../models/source';
 import { Roles } from '../../models/user';
 import { NotFoundError } from '../../errors/not-found-error';
+import { currentUser } from '../../middlewares/current-user';
+import { requireLogin } from '../../middlewares/require-login';
 import { requireRole } from '../../middlewares/require-role';
 import mongoose from 'mongoose';
 
 const router = express.Router();
 
 router.get(
-  '/api/sources/getSource/:sourceId',
+  '/api/sources/:id',
+  currentUser,
+  requireLogin,
   requireRole(Roles.VIEW_INVENTORY),
   async (req: Request, res: Response) => {
-    const { sourceId } = req.params;
-    if (!sourceId || !mongoose.Types.ObjectId.isValid(sourceId)) {
+    const { id } = req.params;
+
+    if (!id || !mongoose.Types.ObjectId.isValid(id)) {
       throw new NotFoundError();
     }
 
-    const source = await Source.findById(sourceId);
+    const source = await Source.findById(id).exec();
 
     if (!source) {
       throw new NotFoundError();

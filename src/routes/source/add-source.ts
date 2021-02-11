@@ -12,7 +12,7 @@ import { requireRole } from '../../middlewares/require-role';
 const router = express.Router();
 
 router.post(
-  '/api/sources/addSource',
+  '/api/sources',
   currentUser,
   requireLogin,
   requireRole(Roles.EDIT_INVENTORY),
